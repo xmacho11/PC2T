@@ -9,7 +9,7 @@ import java.util.Scanner;
  * 
  * Projekt kurzu Pocitace a programovani 2
  * 
- * Dokumentace k projektu v dokumentace_xmacho11_projekt_PC2T_2022.txt
+ * Dokumentace k projektu na https://github.com/xmacho11/PC2T/blob/main/README.md
  * 
  */
 
