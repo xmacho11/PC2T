@@ -1,5 +1,4 @@
-# PC2T
-Napsat dokuemtaci
+# xmacho11_projekt_PC2T_2022
 
 Princip fungovani
 databaze ulozena v pameti, lze ulozit do jednotne SQL databaze
