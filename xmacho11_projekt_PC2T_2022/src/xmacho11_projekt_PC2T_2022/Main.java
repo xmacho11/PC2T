@@ -72,7 +72,7 @@ public class Main {
 		}
 		
 		while(cyklus) { //nekonecny cyklus s moznosti ukonceni
-			System.out.println("1 .. Prijmuti studenta  \t \t|8 ... Vypis postu studentu v oborech");
+			System.out.println("1 .. Prijmuti studenta  \t \t|8 ... Vypis poctu studentu v oborech");
 			System.out.println("2 .. Zapsani nove znamky studentovi \t|9 ... Nacteni databaze ze souboru ");
 			System.out.println("3 .. Propusteni studenta \t \t|10 .. Ulozeni databaze do souboru");
 			System.out.println("4 .. Informace o studentovi \t \t|11 .. Nacteni z SQL databaze");

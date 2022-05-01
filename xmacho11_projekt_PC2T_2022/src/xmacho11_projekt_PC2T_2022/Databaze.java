@@ -6,8 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -371,6 +370,7 @@ public class Databaze extends SQL {
 	}
 	
 	public int nacteniSQL() {
+		
 		int newID = 0;
 
 		if(!connect())
@@ -378,14 +378,39 @@ public class Databaze extends SQL {
 		
 		vycisteniDatabaze();
 		
+		String sql = "SELECT id, skupina, jmeno, prijmeni, rok, prumer, pocetZnamek from Studenti";
 		
+		try{
+			Statement stmt  = conn.createStatement();
+            ResultSet rs    = stmt.executeQuery(sql); //pouziti kodu ulezeneho ve stringu a ziskani vysldku
+            
+            while(rs.next()) { //cyklus pro nahrani vsech vysledku z rs
+            	if(rs.getInt("skupina") == 1) { //vyber skupiny prirazeni studenta, stejne nahravani jako u souboru jen s upravou pro SQL
+            		technickyStudent.put(rs.getInt("id"), new TechnickyStudent(rs.getString("jmeno"), rs.getString("prijmeni"), rs.getInt("rok")));
+            		technickyStudent.get(rs.getInt("id")).setPrumer(rs.getDouble("prumer"));
+            		technickyStudent.get(rs.getInt("id")).setPocetZnamek(rs.getInt("pocetZnamek"));
+            	}
+            	else if(rs.getInt("skupina") == 2) {
+            		humanitniStudent.put(rs.getInt("id"), new HumanitniStudent(rs.getString("jmeno"), rs.getString("prijmeni"), rs.getInt("rok")));
+            		humanitniStudent.get(rs.getInt("id")).setPrumer(rs.getDouble("prumer"));
+            		humanitniStudent.get(rs.getInt("id")).setPocetZnamek(rs.getInt("pocetZnamek"));
+            	}
+            	else if(rs.getInt("skupina") == 3) {
+            		kombinovanyStudent.put(rs.getInt("id"), new KombinovanyStudent(rs.getString("jmeno"), rs.getString("prijmeni"), rs.getInt("rok")));
+            		kombinovanyStudent.get(rs.getInt("id")).setPrumer(rs.getDouble("prumer"));
+            		kombinovanyStudent.get(rs.getInt("id")).setPocetZnamek(rs.getInt("pocetZnamek"));
+            	}
+            	
+            	if(rs.getInt("id") > newID) { //podminka pro zjisteni nejvyssiho ID studenta v SQL
+            		newID = rs.getInt("id");
+            	}
+            }
+	    } 
+	    catch (SQLException e) {
+	    System.out.println(e.getMessage());
+	    }
 		
-		
-		//technickyStudent.put(1, new TechnickyStudent("a", "a", 1));
-		//if(technickyStudent.get(Integer.valueOf(text[0])) != null) { //podminka pri supesnem prvnim zapsani dopsani dat
-			//technickyStudent.get(Integer.valueOf(text[0])).setPrumer(Double.valueOf(text[4])); //dopsani technickych dat ktere uzivatel nemuze na primo prepsat
-			//technickyStudent.get(Integer.valueOf(text[0])).setPocetZnamek(Integer.valueOf(text[5]));
-		
+		newID++; //naviseni nejvyssiho ID pro dalsi pouziti programu
 		
 		disconnect();
 		return newID;

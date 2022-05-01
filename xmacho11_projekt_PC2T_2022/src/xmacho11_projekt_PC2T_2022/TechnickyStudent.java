@@ -23,4 +23,9 @@ public class TechnickyStudent extends Student {
 			System.out.print("Nen");
 		System.out.println("arodil jsem se v prestupnem roce");
 	}
+
+	@Override
+	public int compareTo(Student o) {
+		return 0;
+	}
 }

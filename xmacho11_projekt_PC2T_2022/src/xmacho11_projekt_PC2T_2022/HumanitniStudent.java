@@ -50,4 +50,9 @@ public class HumanitniStudent extends Student {
 				break;
 		}
 	}
+
+	@Override
+	public int compareTo(Student o) {
+		return 0;
+	}
 }

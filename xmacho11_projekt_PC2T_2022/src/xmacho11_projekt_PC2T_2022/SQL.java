@@ -10,8 +10,8 @@ import java.sql.Statement;
 import org.sqlite.SQLiteDataSource;
 
 public class SQL {
-	
-	private Connection conn; //promena pro pripojeni
+		
+	public Connection conn; //promena pro pripojeni
 	
 	public boolean connect() { //funkce pro pripojeni se k databazi
 		conn = null; 
@@ -86,9 +86,5 @@ public class SQL {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-	}
-	
-	public void nahraniZaznamu() {
-		
-	}
+	}	
 }
